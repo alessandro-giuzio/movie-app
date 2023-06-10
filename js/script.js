@@ -3,8 +3,37 @@ const global = {
 };
 
 async function displayPopularMovies(){
-  const ressults = await FetchApiData('movie/popular');
-  console.log(result);
+  const {results }= await FetchApiData('movie/popular');
+  console.log(results);
+
+  results.forEach(movie =>{
+    const div = document.createElement('div');
+    div.classList.add('card')
+    div.innerHTML = `
+            <a href="movie-details.html?${movie.id}">
+            ${
+              movie.poster_path
+              ? `<img
+              src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
+              class="card-img-top"
+              alt="${movie.title}"
+            />` : `<img
+            src="../images/no-image.jpg"
+            class="card-img-top"
+            alt="${movie.title}"
+          />`
+            }
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">${movie.title}</h5>
+            <p class="card-text">
+              <small class="text-muted">Release: ${movie.release_date}</small>
+            </p>
+          </div>`
+
+          document.querySelector('#popular-movies') .appendChild(div);
+  })
+
 }
 
 
@@ -39,7 +68,7 @@ function init(){
   switch(global.currentPage){
     case '/':
     case '/index.html':
-      console.log('Home Page');
+      displayPopularMovies();
       break;
     case '/shows.html':
       console.log('Shows Page');
