@@ -1,11 +1,27 @@
 const global = {
   currentPage: window.location.pathname
 };
-console.log(global.currentPage);
+
+async function displayPopularMovies(){
+  const ressults = await FetchApiData('movie/popular');
+  console.log(result);
+}
+
+
+//Fetch data from API
+async function FetchApiData(endpoint){
+  const API_KEY = '35667ec48817170e0aec9f5e32758579'
+  const API_URL = `https://api.themoviedb.org/3/`;
+
+  const response = await fetch(`${API_URL}${endpoint}?api_key=${API_KEY}&language=en-US`);
+
+  const data = await response.json();
+
+  return data;
+}
 
 
 // Highlight active link
-
 function HighlightActiveLink(){
   const navLinks = document.querySelectorAll('.nav-link');
   navLinks.forEach(link => {
