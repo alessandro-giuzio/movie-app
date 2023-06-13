@@ -1,3 +1,5 @@
+/* const { handler } = require ('./functions/token/token.js') */
+
 const global = {
   currentPage: window.location.pathname,
   search: {
